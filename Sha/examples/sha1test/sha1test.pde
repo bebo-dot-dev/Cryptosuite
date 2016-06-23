@@ -37,73 +37,72 @@ uint8_t hmacKey4[]={
 
 
 void setup() {
-  uint8_t* hash;
   uint32_t a;
   
   Serial.begin(9600);
 
   // SHA tests
-  Serial.println("Test: FIPS 180-2 C.1 and RFC3174 7.3 TEST1");
-  Serial.println("Expect:a9993e364706816aba3e25717850c26c9cd0d89d");
-  Serial.print("Result:");
+  Serial.println(F("Test: FIPS 180-2 C.1 and RFC3174 7.3 TEST1"));
+  Serial.println(F("Expect:a9993e364706816aba3e25717850c26c9cd0d89d"));
+  Serial.print(F("Result:"));
   Sha1.init();
   Sha1.print("abc");
   printHash(Sha1.result());
   Serial.println();
 
-  Serial.println("Test: FIPS 180-2 C.2 and RFC3174 7.3 TEST2");
-  Serial.println("Expect:84983e441c3bd26ebaae4aa1f95129e5e54670f1");
-  Serial.print("Result:");
+  Serial.println(F("Test: FIPS 180-2 C.2 and RFC3174 7.3 TEST2"));
+  Serial.println(F("Expect:84983e441c3bd26ebaae4aa1f95129e5e54670f1"));
+  Serial.print(F("Result:"));
   Sha1.init();
   Sha1.print("abcdbcdecdefdefgefghfghighijhijkijkljklmklmnlmnomnopnopq");
   printHash(Sha1.result());
   Serial.println();
   
-  Serial.println("Test: RFC3174 7.3 TEST4");
-  Serial.println("Expect:dea356a2cddd90c7a7ecedc5ebb563934f460452");
-  Serial.print("Result:");
+  Serial.println(F("Test: RFC3174 7.3 TEST4"));
+  Serial.println(F("Expect:dea356a2cddd90c7a7ecedc5ebb563934f460452"));
+  Serial.print(F("Result:"));
   Sha1.init();
   for (a=0; a<80; a++) Sha1.print("01234567");
   printHash(Sha1.result());
   Serial.println();
 
   // HMAC tests
-  Serial.println("Test: FIPS 198a A.1");
-  Serial.println("Expect:4f4ca3d5d68ba7cc0a1208c9c61e9c5da0403c0a");
-  Serial.print("Result:");
+  Serial.println(F("Test: FIPS 198a A.1"));
+  Serial.println(F("Expect:4f4ca3d5d68ba7cc0a1208c9c61e9c5da0403c0a"));
+  Serial.print(F("Result:"));
   Sha1.initHmac(hmacKey1,64);
   Sha1.print("Sample #1");
   printHash(Sha1.resultHmac());
   Serial.println();
 
-  Serial.println("Test: FIPS 198a A.2");
-  Serial.println("Expect:0922d3405faa3d194f82a45830737d5cc6c75d24");
-  Serial.print("Result:");
+  Serial.println(F("Test: FIPS 198a A.2"));
+  Serial.println(F("Expect:0922d3405faa3d194f82a45830737d5cc6c75d24"));
+  Serial.print(F("Result:"));
   Sha1.initHmac(hmacKey2,20);
   Sha1.print("Sample #2");
   printHash(Sha1.resultHmac());
   Serial.println();
 
-  Serial.println("Test: FIPS 198a A.3");
-  Serial.println("Expect:bcf41eab8bb2d802f3d05caf7cb092ecf8d1a3aa");
-  Serial.print("Result:");
+  Serial.println(F("Test: FIPS 198a A.3"));
+  Serial.println(F("Expect:bcf41eab8bb2d802f3d05caf7cb092ecf8d1a3aa"));
+  Serial.print(F("Result:"));
   Sha1.initHmac(hmacKey3,100);
   Sha1.print("Sample #3");
   printHash(Sha1.resultHmac());
   Serial.println();
 
-  Serial.println("Test: FIPS 198a A.4");
-  Serial.println("Expect:9ea886efe268dbecce420c7524df32e0751a2a26");
-  Serial.print("Result:");
+  Serial.println(F("Test: FIPS 198a A.4"));
+  Serial.println(F("Expect:9ea886efe268dbecce420c7524df32e0751a2a26"));
+  Serial.print(F("Result:"));
   Sha1.initHmac(hmacKey4,49);
   Sha1.print("Sample #4");
   printHash(Sha1.resultHmac());
   Serial.println();
  
   // Long tests 
-  Serial.println("Test: FIPS 180-2 C.3 and RFC3174 7.3 TEST3 (Processing 1000000 characters. This will take a while.)");
-  Serial.println("Expect:34aa973cd4c4daa4f61eeb2bdbad27316534016f");
-  Serial.print("Result:");
+  Serial.println(F("Test: FIPS 180-2 C.3 and RFC3174 7.3 TEST3 (Processing 1000000 characters. This will take a while.)"));
+  Serial.println(F("Expect:34aa973cd4c4daa4f61eeb2bdbad27316534016f"));
+  Serial.print(F("Result:"));
   Sha1.init();
   for (a=0; a<1000000; a++) Sha1.write('a');
   printHash(Sha1.result());

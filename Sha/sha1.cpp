@@ -1,6 +1,12 @@
 #include <string.h>
+#if defined(ESP8266)
+#include <Arduino.h>
+#include <pgmspace.h>
+#else
+#define yield()
 #include <avr/io.h>
 #include <avr/pgmspace.h>
+#endif
 #include "sha1.h"
 
 #define SHA1_K0 0x5a827999
@@ -8,7 +14,7 @@
 #define SHA1_K40 0x8f1bbcdc
 #define SHA1_K60 0xca62c1d6
 
-uint8_t sha1InitState[] PROGMEM = {
+const uint8_t sha1InitState[] PROGMEM = {
   0x01,0x23,0x45,0x67, // H0
   0x89,0xab,0xcd,0xef, // H1
   0xfe,0xdc,0xba,0x98, // H2
@@ -72,9 +78,11 @@ void Sha1Class::addUncounted(uint8_t data) {
   }
 }
 
-void Sha1Class::write(uint8_t data) {
+size_t Sha1Class::write(uint8_t data) {
   ++byteCount;
   addUncounted(data);
+  yield();
+  return 1;
 }
 
 void Sha1Class::pad() {

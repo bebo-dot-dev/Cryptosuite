@@ -33,63 +33,62 @@ void printHash(uint8_t* hash) {
 }
 
 void setup() {
-  uint8_t* hash;
   uint32_t a;
   
   Serial.begin(9600);
 
   // HMAC tests
-  Serial.println("Test: RFC4231 4.2");
-  Serial.println("Expect:b0344c61d8db38535ca8afceaf0bf12b881dc200c9833da726e9376c2e32cff7");
-  Serial.print("Result:");
+  Serial.println(F("Test: RFC4231 4.2"));
+  Serial.println(F("Expect:b0344c61d8db38535ca8afceaf0bf12b881dc200c9833da726e9376c2e32cff7"));
+  Serial.print(F("Result:"));
   Sha256.initHmac(hmacKey1,20);
   Sha256.print("Hi There");
   printHash(Sha256.resultHmac());
   Serial.println();
   
-  Serial.println("Test: RFC4231 4.3");
-  Serial.println("Expect:5bdcc146bf60754e6a042426089575c75a003f089d2739839dec58b964ec3843");
-  Serial.print("Result:");
+  Serial.println(F("Test: RFC4231 4.3"));
+  Serial.println(F("Expect:5bdcc146bf60754e6a042426089575c75a003f089d2739839dec58b964ec3843"));
+  Serial.print(F("Result:"));
   Sha256.initHmac((uint8_t*)"Jefe",4);
   Sha256.print("what do ya want for nothing?");
   printHash(Sha256.resultHmac());
   Serial.println();
   
-  Serial.println("Test: RFC4231 4.4");
-  Serial.println("Expect:773ea91e36800e46854db8ebd09181a72959098b3ef8c122d9635514ced565fe");
-  Serial.print("Result:");
+  Serial.println(F("Test: RFC4231 4.4"));
+  Serial.println(F("Expect:773ea91e36800e46854db8ebd09181a72959098b3ef8c122d9635514ced565fe"));
+  Serial.print(F("Result:"));
   Sha256.initHmac(hmacKey3,20);
   for (a=0; a<50; a++) Sha256.write(0xdd);
   printHash(Sha256.resultHmac());
   Serial.println();
 
-  Serial.println("Test: RFC4231 4.5");
-  Serial.println("Expect:82558a389a443c0ea4cc819899f2083a85f0faa3e578f8077a2e3ff46729665b");
-  Serial.print("Result:");
+  Serial.println(F("Test: RFC4231 4.5"));
+  Serial.println(F("Expect:82558a389a443c0ea4cc819899f2083a85f0faa3e578f8077a2e3ff46729665b"));
+  Serial.print(F("Result:"));
   Sha256.initHmac(hmacKey2,25);
   for (a=0; a<50; a++) Sha256.write(0xcd);
   printHash(Sha256.resultHmac());
   Serial.println();
   
-  Serial.println("Test: RFC4231 4.6");
-  Serial.println("Expect:a3b6167473100ee06e0c796c2955552b-------------------------------");
-  Serial.print("Result:");
+  Serial.println(F("Test: RFC4231 4.6"));
+  Serial.println(F("Expect:a3b6167473100ee06e0c796c2955552b-------------------------------"));
+  Serial.print(F("Result:"));
   Sha256.initHmac(hmacKey4,20);
   Sha256.print("Test With Truncation");
   printHash(Sha256.resultHmac());
   Serial.println();
   
-  Serial.println("Test: RFC4231 4.7");
-  Serial.println("Expect:60e431591ee0b67f0d8a26aacbf5b77f8e0bc6213728c5140546040f0ee37f54");
-  Serial.print("Result:");
+  Serial.println(F("Test: RFC4231 4.7"));
+  Serial.println(F("Expect:60e431591ee0b67f0d8a26aacbf5b77f8e0bc6213728c5140546040f0ee37f54"));
+  Serial.print(F("Result:"));
   Sha256.initHmac(hmacKey5,131);
   Sha256.print("Test Using Larger Than Block-Size Key - Hash Key First");
   printHash(Sha256.resultHmac());
   Serial.println();
 
-  Serial.println("Test: RFC4231 4.8");
-  Serial.println("Expect:9b09ffa71b942fcb27635fbcd5b0e944bfdc63644f0713938a7f51535c3a35e2");
-  Serial.print("Result:");
+  Serial.println(F("Test: RFC4231 4.8"));
+  Serial.println(F("Expect:9b09ffa71b942fcb27635fbcd5b0e944bfdc63644f0713938a7f51535c3a35e2"));
+  Serial.print(F("Result:"));
   Sha256.initHmac(hmacKey5,131);
   Sha256.print("This is a test using a larger than block-size key and a larger than "
   "block-size data. The key needs to be hashed before being used by the HMAC algorithm.");
